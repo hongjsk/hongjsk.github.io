@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show me your dimension</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+
+<body>
+    <b>Show me your dimension</b>
+    <table>
+        <tr><td>width</td><td><input id="width"/></td></tr>
+        <tr><td>height</td><td><input id="height"/></td></tr>
+        <tr><td>dpr</td><td><input id="dpr"/></td></tr>
+        <tr><td>user agent field</td><td><textarea id="ua"></textarea></td></tr>
+    </table>
+
+    <script>
+        var w = window.screen.width
+        var h = window.screen.height
+        var dpr = window.devicePixelRatio
+        var ua = navigator.userAgent
+        document.getElementById("width").setAttribute('value', w)
+        document.getElementById("height").setAttribute('value', h)
+        document.getElementById("dpr").setAttribute('value', dpr)
+        document.getElementById("ua").innerText = ua
+
+    </script>
+</body>
+</html>
