@@ -19,6 +19,28 @@
         window.onload = function() {
             updateScreenInfo()
         }
+
+        function showMessage(text) {
+            document.getElementById("params_copied").innerText = text
+        }
+
+        function copyToClipboard() {
+            showMessage("fetching")
+            
+            var w = window.screen.width
+            var h = window.screen.height
+            var dpr = window.devicePixelRatio
+            var ua = navigator.userAgent
+            var text = `{"width": ${w}, "height": ${h}, dpr: ${dpr}, "ua": "${ua}"}`
+            navigator.clipboard.writeText(text).then(function() {
+                setTimeout(function() {
+                    showMessage("copied!")
+                }, 300)
+            }, function() {
+                alert("Unable to write to clipboard. :(")
+                showMessage("failed!")
+            })
+        }
     </script>
 </head>
 
@@ -30,7 +52,8 @@
         <tr><td>dpr</td><td><input id="dpr"/></td></tr>
         <tr><td>user agent field</td><td><textarea id="ua"></textarea></td></tr>
     </table>
-    <script>
-    </script>
+    <div>
+        <a href="javascript:copyToClipboard()">copy to clipboard</a>&nbsp;<span id="params_copied"></span>
+    </div>
 </body>
 </html>
