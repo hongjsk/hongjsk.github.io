@@ -14,15 +14,18 @@
             document.getElementById("dpr").setAttribute('value', dpr)
             document.getElementById("ua").innerText = ua
 
-            if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
-                navigator.userAgentData.getHighEntropyValues(['platform', 'mobile']).then(function(v){
-                    console.log(v)
-                    document.getElementById("mobile").setAttribute('value', v.mobile)
-                    document.getElementById("platform").setAttribute('value', v.platform)
-                    document.getElementById("brands").value = v.brands.map(item => {
+            if (navigator.userAgentData) {
+                if (navigator.userAgentData.platform) {
+                    document.getElementById("platform").setAttribute('value', navigator.userAgentData.platform)
+                }
+                if (navigator.userAgentData.mobile) {
+                    document.getElementById("mobile").setAttribute('value', navigator.userAgentData.mobile)
+                }
+                if (navigator.userAgentData.brands && Array.isArray(navigator.userAgentData.brands)) {
+                    document.getElementById("brands").value = navigator.userAgentData.brands.map(item => {
                         return item.brand+':'+item.version
                     }).join('\n')
-                })
+                }
             }
         }
         
