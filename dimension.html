@@ -13,6 +13,11 @@
             document.getElementById("height").setAttribute('value', h)
             document.getElementById("dpr").setAttribute('value', dpr)
             document.getElementById("ua").innerText = ua
+            document.getElementById("innerWidth").setAttribute('value', window.innerWidth)
+
+            if (navigator.maxTouchPoints != undefined) {
+                document.getElementById("maxTouchPoints").setAttribute('value', navigator.maxTouchPoints)
+            }
 
             if (navigator.userAgentData) {
                 if (navigator.userAgentData.platform != undefined) {
@@ -26,6 +31,10 @@
                         return item.brand+':'+item.version
                     }).join('\n')
                 }
+
+                navigator.userAgentData.getHighEntropyValues(["platform", "model"]).then(ua => {
+                    console.log(ua)
+                });
             }
         }
         
@@ -64,10 +73,12 @@
         <tr><td>width</td><td><input id="width"/></td></tr>
         <tr><td>height</td><td><input id="height"/></td></tr>
         <tr><td>dpr</td><td><input id="dpr"/></td></tr>
+        <tr><td>user agent field</td><td><textarea id="ua" style="height: 100px; width: 257px;"></textarea></td></tr>
         <tr><td>mobile</td><td><input id="mobile"/></td></tr>
         <tr><td>platform</td><td><input id="platform"/></td></tr>
+        <tr><td>innterWidth</td><td><input id="innerWidth"/></td></tr>
+        <tr><td>max touch points</td><td><input id="maxTouchPoints"/></td></tr>
         <tr><td>brands</td><td><textarea id="brands" style="min-height: 60px; width: 257px;"></textarea></td></tr>
-        <tr><td>user agent field</td><td><textarea id="ua" style="height: 100px; width: 257px;"></textarea></td></tr>
     </table>
     <div>
         <a href="javascript:copyToClipboard()">copy to clipboard</a>&nbsp;<span id="params_copied"></span>
